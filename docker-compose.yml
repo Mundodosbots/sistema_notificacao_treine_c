@@ -5,27 +5,27 @@ services:
     build: .
     container_name: nextfit-scheduler
     restart: unless-stopped
-    env_file:
-      - .env  # Carregar variáveis do arquivo .env
     environment:
       - TZ=America/Sao_Paulo
       - DATA_DIR=/app/data
       - LOG_DIR=/app/logs
-      - NEXTFIT_API_KEY=N5dTS6i7mSu9pQ4PUeN_zuvIDiT4qmGv
+      # API NextFit (valor vem das variáveis do Portainer / stack.env)
+      - NEXTFIT_API_KEY=${NEXTFIT_API_KEY}
       # API de Mensagens (mundodosbots)
-      - MESSAGE_API_TOKEN=${MESSAGE_API_TOKEN:-}
+      - MESSAGE_API_TOKEN=${MESSAGE_API_TOKEN}
       # Flow IDs para cada tipo de mensagem
-      - FLOW_ID_VENCENDO_HOJE=${FLOW_ID_VENCENDO_HOJE:-0}
-      - FLOW_ID_VENCENDO_3_DIAS=${FLOW_ID_VENCENDO_3_DIAS:-0}
-      - FLOW_ID_VENCIDO_3_DIAS=${FLOW_ID_VENCIDO_3_DIAS:-0}
-      - FLOW_ID_VENCIDO_5_DIAS=${FLOW_ID_VENCIDO_5_DIAS:-0}
-      - FLOW_ID_VENCIDO_30_DIAS=${FLOW_ID_VENCIDO_30_DIAS:-0}
-      - FLOW_ID_ANIVERSARIANTE=${FLOW_ID_ANIVERSARIANTE:-0}
+      - FLOW_ID_VENCENDO_HOJE=${FLOW_ID_VENCENDO_HOJE}
+      - FLOW_ID_VENCENDO_3_DIAS=${FLOW_ID_VENCENDO_3_DIAS}
+      - FLOW_ID_VENCIDO_3_DIAS=${FLOW_ID_VENCIDO_3_DIAS}
+      - FLOW_ID_VENCIDO_5_DIAS=${FLOW_ID_VENCIDO_5_DIAS}
+      - FLOW_ID_VENCIDO_30_DIAS=${FLOW_ID_VENCIDO_30_DIAS}
+      - FLOW_ID_ANIVERSARIANTE=${FLOW_ID_ANIVERSARIANTE}
       # Nomes dos campos customizados na API de mensagens
-      - MESSAGE_FIELD_1=${MESSAGE_FIELD_1:-}
-      - MESSAGE_FIELD_2=${MESSAGE_FIELD_2:-}
-      - MESSAGE_FIELD_3=${MESSAGE_FIELD_3:-}
-      - MESSAGE_FIELD_4=${MESSAGE_FIELD_4:-}
+      - MESSAGE_FIELD_1=${MESSAGE_FIELD_1}
+      - MESSAGE_FIELD_2=${MESSAGE_FIELD_2}
+      - MESSAGE_FIELD_3=${MESSAGE_FIELD_3}
+      - MESSAGE_FIELD_4=${MESSAGE_FIELD_4}
+      - MESSAGE_FIELD_5=${MESSAGE_FIELD_5}
     volumes:
       # Volume persistente para dados JSON
       - ./data:/app/data
