@@ -2,9 +2,12 @@ version: '3.8'
 
 services:
   nextfit-scheduler:
-    build: .
-    container_name: nextfit-scheduler
-    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      restart_policy:
+        condition: unless-stopped
     environment:
       - TZ=America/Sao_Paulo
       - DATA_DIR=/app/data
@@ -28,14 +31,15 @@ services:
       - MESSAGE_FIELD_5=${MESSAGE_FIELD_5}
     volumes:
       # Volume persistente para dados JSON
-      - ./data:/app/data
-      # Volume para logs (opcional)
-      - ./logs:/app/logs
+      - nextfit-data:/app/data
+      # Volume para logs
+      - nextfit-logs:/app/logs
     networks:
       - nextfit-network
-    # Manter container rodando
-    stdin_open: true
-    tty: true
+
+volumes:
+  nextfit-data:
+  nextfit-logs:
 
 networks:
   nextfit-network:
