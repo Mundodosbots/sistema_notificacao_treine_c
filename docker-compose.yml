@@ -29,17 +29,22 @@ services:
       - MESSAGE_FIELD_4=${MESSAGE_FIELD_4}
       - MESSAGE_FIELD_5=${MESSAGE_FIELD_5}
     volumes:
-      # Volume persistente para dados JSON
+      # Volume persistente para dados JSON (usar volume externo existente)
       - nextfit-data:/app/data
-      # Volume para logs
+      # Volume para logs (usar volume externo existente)
       - nextfit-logs:/app/logs
     networks:
-      - nextfit-network
+      - CLNet
 
 volumes:
   nextfit-data:
+    external: true
+    name: lp_zarra  # Usar o volume externo existente
   nextfit-logs:
+    external: true
+    name: lp_zarra  # Usar o mesmo volume externo ou criar um específico se necessário
 
 networks:
-  nextfit-network:
-    driver: overlay
+  CLNet:
+    external: true
+    name: CLNet  # Usar a rede externa existente
