@@ -135,7 +135,16 @@ def main():
     # Listar jobs agendados
     logger.info("\nJobs agendados:")
     for job in scheduler.get_jobs():
-        logger.info(f"  - {job.name} (ID: {job.id}) - Próxima execução: {job.next_run_time}")
+        # APScheduler pode variar a API dependendo da versão/implementação (ex: next_run_time pode não existir)
+        try:
+            next_run = getattr(job, "next_run_time", None)
+        except Exception:
+            next_run = None
+
+        if next_run is not None:
+            logger.info(f"  - {job.name} (ID: {job.id}) - Próxima execução: {next_run}")
+        else:
+            logger.info(f"  - {job.name} (ID: {job.id})")
     
     logger.info("\nScheduler iniciado. Aguardando execução dos jobs...")
     logger.info("Pressione Ctrl+C para parar\n")
