@@ -2,10 +2,9 @@ version: '3.8'
 
 services:
   nextfit-scheduler:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: nextfit-scheduler:latest
     deploy:
+      replicas: 1
       restart_policy:
         condition: unless-stopped
     environment:
