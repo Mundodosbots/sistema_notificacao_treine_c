@@ -42,10 +42,10 @@ services:
 volumes:
   nextfit-data:
     external: true
-    name: lp_zarra  # Usar o volume externo existente
+    name: nextfit-data  # Usar o volume externo existente
   nextfit-logs:
     external: true
-    name: lp_zarra  # Usar o mesmo volume externo ou criar um específico se necessário
+    name: nextfit-logs  # Usar o mesmo volume externo ou criar um específico se necessário
 
 networks:
   CLNet:
