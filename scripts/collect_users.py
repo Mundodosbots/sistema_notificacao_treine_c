@@ -1,6 +1,6 @@
 """
 Script para coletar todos os usuários da API NextFit
-Executa todo domingo às 1h da manhã
+Executa todo domingo às 2h da manhã
 CRÍTICO: Sempre deleta o arquivo users.json existente e cria um novo do zero
 """
 import os

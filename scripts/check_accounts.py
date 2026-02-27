@@ -1,6 +1,6 @@
 """
 Script para verificar contas a receber e identificar aniversariantes
-Executa todo dia às 8h da manhã
+Executa todo dia às 9h da manhã
 Busca contas em múltiplos períodos e envia mensagens
 """
 import os

@@ -1,8 +1,8 @@
 """
 Script principal que gerencia os agendamentos dos jobs
 Usa APScheduler para executar:
-- Coleta de usuários: Todo domingo às 1h da manhã
-- Verificação de contas: Todo dia às 8h da manhã
+- Coleta de usuários: Todo domingo às 2h da manhã
+- Verificação de contas: Todo dia às 9h da manhã
 """
 import os
 import sys
@@ -59,9 +59,9 @@ scheduler = BlockingScheduler(timezone=TZ_BRASILIA)
 
 
 def job_collect_users():
-    """Job para coletar usuários todo domingo às 1h"""
+    """Job para coletar usuários todo domingo às 2h"""
     logger.info("=" * 60)
-    logger.info("INICIANDO JOB: Coleta de usuários (Domingo 1h)")
+    logger.info("INICIANDO JOB: Coleta de usuários (Domingo 2h)")
     logger.info("=" * 60)
     try:
         collect_users.collect_all_users()
@@ -71,9 +71,9 @@ def job_collect_users():
 
 
 def job_check_accounts():
-    """Job para verificar contas e aniversariantes todo dia às 8h"""
+    """Job para verificar contas e aniversariantes todo dia às 9h"""
     logger.info("=" * 60)
-    logger.info("INICIANDO JOB: Verificação de contas e aniversariantes (8h)")
+    logger.info("INICIANDO JOB: Verificação de contas e aniversariantes (9h)")
     logger.info("=" * 60)
     try:
         check_accounts.check_accounts_and_birthdays()
@@ -112,25 +112,25 @@ def main():
         logger.error(f"✗ Erro na coleta inicial de usuários: {e}", exc_info=True)
         logger.warning("Continuando com scheduler mesmo com erro na coleta inicial...")
     
-    # Agendar job de coleta de usuários: Todo domingo às 1h da manhã
+    # Agendar job de coleta de usuários: Todo domingo às 2h da manhã
     scheduler.add_job(
         job_collect_users,
-        trigger=CronTrigger(day_of_week='sun', hour=1, minute=0, timezone=TZ_BRASILIA),
+        trigger=CronTrigger(day_of_week='sun', hour=2, minute=0, timezone=TZ_BRASILIA),
         id='collect_users',
-        name='Coleta de usuários (Domingo 1h)',
+        name='Coleta de usuários (Domingo 2h)',
         replace_existing=True
     )
-    logger.info("Job agendado: Coleta de usuários - Todo domingo às 1:00")
+    logger.info("Job agendado: Coleta de usuários - Todo domingo às 2:00")
     
-    # Agendar job de verificação de contas: Todo dia às 8h da manhã
+    # Agendar job de verificação de contas: Todo dia às 9h da manhã
     scheduler.add_job(
         job_check_accounts,
-        trigger=CronTrigger(hour=8, minute=0, timezone=TZ_BRASILIA),
+        trigger=CronTrigger(hour=9, minute=0, timezone=TZ_BRASILIA),
         id='check_accounts',
-        name='Verificação de contas e aniversariantes (8h)',
+        name='Verificação de contas e aniversariantes (9h)',
         replace_existing=True
     )
-    logger.info("Job agendado: Verificação de contas - Todo dia às 8:00")
+    logger.info("Job agendado: Verificação de contas - Todo dia às 9:00")
     
     # Listar jobs agendados
     logger.info("\nJobs agendados:")

@@ -6,8 +6,8 @@ Sistema automatizado para coletar dados de usuários e verificar contas a recebe
 
 - **Coleta Semanal de Usuários**: Coleta todos os usuários da API NextFit e salva em JSON
   - Executa uma vez ao iniciar o container
-  - Depois, todo domingo às 1h da manhã (atualização semanal)
-- **Verificação Diária de Contas**: Todo dia às 8h da manhã
+  - Depois, todo domingo às 2h da manhã (atualização semanal)
+- **Verificação Diária de Contas**: Todo dia às 9h da manhã
   - Busca contas vencendo hoje
   - Busca contas vencendo em 3 dias
   - Busca contas vencidas há 3 dias
@@ -150,8 +150,8 @@ O sistema usa APScheduler para executar jobs automaticamente:
 
 - **Coleta de Usuários**: 
   - Executa **uma vez ao iniciar o container** (não espera domingo)
-  - Depois, todo domingo às 1:00 (horário de Brasília)
-- **Verificação de Contas**: Todo dia às 8:00 (horário de Brasília)
+  - Depois, todo domingo às 2:00 (horário de Brasília)
+- **Verificação de Contas**: Todo dia às 9:00 (horário de Brasília)
   - Busca contas em múltiplos períodos
   - Identifica aniversariantes
   - Envia mensagens automaticamente
